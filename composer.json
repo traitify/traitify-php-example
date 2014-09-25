@@ -1,0 +1,5 @@
+{
+    "require": {
+        "traitify/client": "dev-master"
+    }
+}
