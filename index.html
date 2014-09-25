@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Traitify-php-example by traitify</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Traitify-php-example</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/traitify/traitify-php-example">View the Project on GitHub <small>traitify/traitify-php-example</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/traitify/traitify-php-example/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/traitify/traitify-php-example/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/traitify/traitify-php-example">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="installing-traitify-using-php-and-javascript" class="anchor" href="#installing-traitify-using-php-and-javascript"><span class="octicon octicon-link"></span></a>Installing Traitify using PHP and Javascript</h1>
+
+<p>Traitify is best used with a server side component, and a client side component. These docs demonstrate the use of PHP as the server side libray, and javascript as the client library:</p>
+
+<p>To get started you'll have to download compser:
+<a href="https://getcomposer.org/doc/00-intro.md#globally">https://getcomposer.org/doc/00-intro.md#globally</a></p>
+
+<p>And get private key from the site below:
+<a href="https://developer.traitify.com">https://developer.traitify.com</a></p>
+
+<p>Then you will add traitify to your composer.json:</p>
+
+<h4>
+<a name="composerjson" class="anchor" href="#composerjson"><span class="octicon octicon-link"></span></a>composer.json</h4>
+
+<div class="highlight highlight-JSON"><pre><span class="p">{</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"traitify/client"</span><span class="p">:</span> <span class="s2">"dev-master"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Then in a file called traitify.php add:</p>
+
+<pre><code>&lt;?php
+require 'vendor/autoload.php';
+
+$host = 'api-sandbox.traitify.com'; /* Example Host */ 
+$version = 'v1';
+$privateKey = '34aeraw23-3a43a32-234a34as42'; /* Example Private Key */
+$publicKey = '9sjeraw3s-3d46a22-224a54ss42'; /* Example Public Key */
+
+$traitify = new Traitify\Client([
+  'host'=&gt; $host,
+  'version'=&gt; $version,
+  'privateKey'=&gt; $publicKey
+]);
+
+$assessment = $traitify-&gt;createAssessment("career-deck");
+?&gt;
+</code></pre>
+
+<p>And in your index.php file add:</p>
+
+<pre><code>&lt;?php require("traitify.php"); ?&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Traitify Assessment Application&lt;/title&gt;
+  &lt;script src="https://s3.amazonaws.com/traitify-cdn/lib/edge.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    Traitify.setHost("&lt;?= $host ?&gt;");
+    Traitify.setPublicKey("&lt;?= $publicKey ?&gt;");
+    Traitify.setVersion("&lt;?= $version ?&gt;");
+    assessmentId = "&lt;?= $assessment-&gt;id ?&gt;";
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="widget"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    traitify = Traitify.ui.load(assessmentId, ".widget");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/traitify">traitify</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
